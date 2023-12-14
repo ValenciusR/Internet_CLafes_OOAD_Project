@@ -17,7 +17,7 @@ public class Connect {
 	private final String connection = String.format("jdbc:mysql://%s/%s", host, database);
 	
 	private Connection con;
-	private static PreparedStatement ps;
+	public PreparedStatement ps;
 	
 	public static Connect connect;
 	public ResultSet rs;
@@ -52,21 +52,25 @@ public class Connect {
 		return rs;
 	}
 	
-	public void insertUser(String query) {
+	public void execute(String query) {
 		try {
 			ps = con.prepareStatement(query);
-			
-			ps.setLong(1, 0);
-			ps.setString(2, "mingmingganteg");
-			ps.setString(3, "Ming2");
-			ps.setInt(4, 17);
-			ps.setString(5, "Admin");
-			
-			
-			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public PreparedStatement prepareStatment(String query) {
+		ps = null;
+		
+		try {
+			ps = con.prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ps;
 	}
 }
