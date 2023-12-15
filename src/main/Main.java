@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.AddPCPage;
 import view.AdminHomePage;
+import view.RegisterPage;
 
 public class Main extends Application{
 	public static Stage stage;
@@ -25,8 +26,11 @@ public class Main extends Application{
 		// TODO Auto-generated method stub
 		stage = primaryStage;
 //		Main.changeScene(new AddPCPage().initializeAddPCPage());
-		Main.changeScene(new AdminHomePage().initializeAdminPage());
-		
+//		Main.changeScene(new AdminHomePage().initializeAdminPage());
+//		Main.changeScene(new HomePage().initializeHomePage());
+		Main.changeScene(new RegisterPage().initializeRegisterPage());
+//		Main.changeScene(new LoginPage().initializeLoginPage());
+//		
 		stage.setTitle("Application");
 		stage.show();
 	}

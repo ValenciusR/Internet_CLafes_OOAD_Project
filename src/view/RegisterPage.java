@@ -1,5 +1,6 @@
 package view;
 
+import controller.PageController;
 import controller.UserController;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,6 +33,8 @@ public class RegisterPage{
 		Menu menu;
 		public MenuItem menuItem;
 		public Alert alert;
+		
+		public Button btnTestRF;
 	}
 
 	private void initializeAlert(RegisterVar registerVar) {
@@ -53,13 +56,15 @@ public class RegisterPage{
 		registerVar.pass_pf = new PasswordField();
 		registerVar.age_lbl = new Label("Age");
 		registerVar.age_spin = new Spinner<>(1, 100, 17); // min, max, initial
-		registerVar.button_regis = new Button("REGISTER");
+		registerVar.button_regis = new Button("Register");
 		registerVar.button_login = new Button("Redirect to Login");
+		
+		registerVar.btnTestRF = new Button("Make Report");
 
 		registerVar.vb1.getChildren().add(registerVar.title);
 		registerVar.vb2.getChildren().addAll(registerVar.username_lbl, registerVar.username_tf,
 				registerVar.password_lbl, registerVar.pass_pf, registerVar.age_lbl, registerVar.age_spin,
-				registerVar.button_regis, registerVar.button_login);
+				registerVar.button_regis, registerVar.button_login, registerVar.btnTestRF);
 
 		registerVar.gp.add(registerVar.vb1, 0, 0);
 		registerVar.gp.add(registerVar.vb2, 0, 1);
@@ -73,13 +78,13 @@ public class RegisterPage{
 		UserController userController = new UserController();
 		userController.handling_regis(registerVar);
 		
-//		PageController pageController = new PageController();
-//		pageController.changePageToLogin(registerVar);
+		PageController pageController = new PageController();
+		pageController.changePageToReportForm(registerVar);
 	}
 
 
 	public Scene initializeRegisterPage(){
-		// TODO Auto-generated method stub
+		
 		RegisterVar registerVar = new RegisterVar();
 		initialize(registerVar);
 		initializeAlert(registerVar);

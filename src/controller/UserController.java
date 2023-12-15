@@ -19,7 +19,6 @@ public class UserController {
 				registerVar.alert.showAndWait();
 			} else {
 				userModel.regis(new User(id,username, password, age,role));
-				
 			}
 		});
 	}
