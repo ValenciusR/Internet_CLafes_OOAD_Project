@@ -28,8 +28,8 @@ public class AddPCPage {
 		public ComboBox<String> pc_Condition;
 		public Button button_addPc;
 		MenuBar menuBar;
-		Menu pc_menu;
-		public MenuItem menuItem1, menuItem2, menuItem3;
+		Menu pc_menu, staff_menu;
+		public MenuItem menuItem1, menuItem2, menuItem3, staffItem1, staffItem2;
 		public Alert fillalert, idalert;
 	}
 	
@@ -59,8 +59,15 @@ public class AddPCPage {
 		
 		addPCVar.pc_menu.getItems().addAll(addPCVar.menuItem1, addPCVar.menuItem2, addPCVar.menuItem3);
 		
+		addPCVar.staff_menu = new Menu("Staff Management");
+		
+		addPCVar.staffItem1 = new MenuItem("Add Staff Job"); 
+		addPCVar.staffItem2 = new MenuItem("Update Staff Job"); 
+		
+		addPCVar.staff_menu.getItems().addAll(addPCVar.staffItem1, addPCVar.staffItem2);
+		
 		addPCVar.menuBar = new MenuBar();
-		addPCVar.menuBar.getMenus().add(addPCVar.pc_menu);
+		addPCVar.menuBar.getMenus().addAll(addPCVar.pc_menu, addPCVar.staff_menu);
 
 		addPCVar.title = new Label("Add New PC");
 		addPCVar.id_lbl = new Label("ID : ");

@@ -29,6 +29,8 @@ public class UpdatePCPage {
 		MenuBar menuBar;
 		Menu pc_menu;
 		public MenuItem menuItem1, menuItem2, menuItem3;
+		Menu staff_menu;
+		public MenuItem staffItem1, staffItem2;
 		public Alert alert;
 	}
 	
@@ -53,8 +55,15 @@ public class UpdatePCPage {
 		
 		updatePCVar.pc_menu.getItems().addAll(updatePCVar.menuItem1, updatePCVar.menuItem2, updatePCVar.menuItem3);
 		
+		updatePCVar.staff_menu = new Menu("Staff Management");
+		
+		updatePCVar.staffItem1 = new MenuItem("Add Staff Job"); 
+		updatePCVar.staffItem2 = new MenuItem("Update Staff Job"); 
+		
+		updatePCVar.staff_menu.getItems().addAll(updatePCVar.staffItem1, updatePCVar.staffItem2);
+		
 		updatePCVar.menuBar = new MenuBar();
-		updatePCVar.menuBar.getMenus().add(updatePCVar.pc_menu);
+		updatePCVar.menuBar.getMenus().addAll(updatePCVar.pc_menu, updatePCVar.staff_menu);
 
 		updatePCVar.title = new Label("Update PC");
 		updatePCVar.oldid_lbl = new Label("Old ID : ");

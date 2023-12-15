@@ -1,6 +1,8 @@
 package controller;
 
 import main.Main;
+import view.AddJobPage;
+import view.AddJobPage.AddJobVar;
 import view.AddPCPage;
 import view.AddPCPage.AddPCVar;
 import view.AdminHomePage.AdminHomeVar;
@@ -21,6 +23,10 @@ public class AdminPageController {
 		adminHomeVar.menuItem3.setOnAction(e->{
 			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
 		});
+		
+		adminHomeVar.staffItem1.setOnAction(e->{
+			Main.changeScene(new AddJobPage().initializeAddJobPage());
+		});
 	}
 	
 	public void changeAddPCMenuPage(AddPCVar addPCVar) {
@@ -33,6 +39,11 @@ public class AdminPageController {
 		addPCVar.menuItem3.setOnAction(e->{
 			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
 		});
+		
+		addPCVar.staffItem1.setOnAction(e->{
+			Main.changeScene(new AddJobPage().initializeAddJobPage());
+		});
+		
 	}
 	
 	public void changeDeletePCMenuPage(DeletePCVar deletePCVar) {
@@ -45,6 +56,10 @@ public class AdminPageController {
 		deletePCVar.menuItem3.setOnAction(e->{
 			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
 		});
+		
+		deletePCVar.staffItem1.setOnAction(e->{
+			Main.changeScene(new AddJobPage().initializeAddJobPage());
+		});
 	}
 	
 	public void changeUpdatePCMenuPage(UpdatePCVar updatePCVar) {
@@ -56,6 +71,24 @@ public class AdminPageController {
 		});
 		updatePCVar.menuItem3.setOnAction(e->{
 			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
+		});
+		updatePCVar.staffItem1.setOnAction(e->{
+			Main.changeScene(new AddJobPage().initializeAddJobPage());
+		});
+	}
+	
+	public void changeAddJobMenuPage(AddJobVar addJobVar) {
+		addJobVar.menuItem1.setOnAction(e->{
+			Main.changeScene(new AddPCPage().initializeAddPCPage());
+		});
+		addJobVar.menuItem2.setOnAction(e->{
+			Main.changeScene(new DeletePCPage().initializeDeletePCPage());
+		});
+		addJobVar.menuItem3.setOnAction(e->{
+			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
+		});
+		addJobVar.staffItem1.setOnAction(e->{
+			Main.changeScene(new AddJobPage().initializeAddJobPage());
 		});
 		
 	}

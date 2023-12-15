@@ -27,8 +27,8 @@ public class AdminHomePage {
 		public Spinner<Integer> age_spin;
 		public Button button_regis, button_login;
 		MenuBar menuBar;
-		Menu pc_menu;
-		public MenuItem menuItem1, menuItem2, menuItem3;
+		Menu pc_menu, staff_menu;
+		public MenuItem menuItem1, menuItem2, menuItem3, staffItem1, staffItem2;
 	}
 	
 	private void initialize(AdminHomeVar adminHomeVar) {
@@ -45,8 +45,15 @@ public class AdminHomePage {
 		
 		adminHomeVar.pc_menu.getItems().addAll(adminHomeVar.menuItem1, adminHomeVar.menuItem2, adminHomeVar.menuItem3);
 		
+		adminHomeVar.staff_menu = new Menu("Staff Management");
+		
+		adminHomeVar.staffItem1 = new MenuItem("Add Staff Job"); 
+		adminHomeVar.staffItem2 = new MenuItem("Update Staff Job"); 
+		
+		adminHomeVar.staff_menu.getItems().addAll(adminHomeVar.staffItem1, adminHomeVar.staffItem2);
+		
 		adminHomeVar.menuBar = new MenuBar();
-		adminHomeVar.menuBar.getMenus().add(adminHomeVar.pc_menu);
+		adminHomeVar.menuBar.getMenus().addAll(adminHomeVar.pc_menu, adminHomeVar.staff_menu);
 
 		adminHomeVar.title = new Label("Welcome to Admin Home Page");
 

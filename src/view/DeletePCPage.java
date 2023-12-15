@@ -27,6 +27,8 @@ public class DeletePCPage {
 		MenuBar menuBar;
 		Menu pc_menu;
 		public MenuItem menuItem1, menuItem2, menuItem3;
+		Menu staff_menu;
+		public MenuItem staffItem1, staffItem2;
 		public Alert alert;
 	}
 	
@@ -51,8 +53,15 @@ public class DeletePCPage {
 		
 		deletePCVar.pc_menu.getItems().addAll(deletePCVar.menuItem1, deletePCVar.menuItem2, deletePCVar.menuItem3);
 		
+		deletePCVar.staff_menu = new Menu("Staff Management");
+		
+		deletePCVar.staffItem1 = new MenuItem("Add Staff Job"); 
+		deletePCVar.staffItem2 = new MenuItem("Update Staff Job"); 
+		
+		deletePCVar.staff_menu.getItems().addAll(deletePCVar.staffItem1, deletePCVar.staffItem2);
+		
 		deletePCVar.menuBar = new MenuBar();
-		deletePCVar.menuBar.getMenus().add(deletePCVar.pc_menu);
+		deletePCVar.menuBar.getMenus().addAll(deletePCVar.pc_menu, deletePCVar.staff_menu);
 
 		deletePCVar.title = new Label("Delete PC");
 		deletePCVar.id_lbl = new Label("ID : ");
