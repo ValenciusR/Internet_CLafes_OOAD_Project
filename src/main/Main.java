@@ -3,7 +3,8 @@ package main;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.RegisterPage;
+import view.AddPCPage;
+import view.AdminHomePage;
 
 public class Main extends Application{
 	public static Stage stage;
@@ -23,7 +24,8 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		stage = primaryStage;
-		Main.changeScene(new RegisterPage().initializeRegisterPage());
+//		Main.changeScene(new AddPCPage().initializeAddPCPage());
+		Main.changeScene(new AdminHomePage().initializeAdminPage());
 		
 		stage.setTitle("Application");
 		stage.show();

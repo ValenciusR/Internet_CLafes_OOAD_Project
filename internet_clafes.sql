@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2023 at 06:59 AM
+-- Generation Time: Dec 15, 2023 at 11:10 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `job` (
   `Job_ID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
-  `PC_ID` int(11) NOT NULL,
+  `PC_ID` varchar(255) NOT NULL,
   `JobStatus` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -41,7 +41,7 @@ CREATE TABLE `job` (
 --
 
 CREATE TABLE `pc` (
-  `PC_ID` int(11) NOT NULL,
+  `PC_ID` varchar(255) NOT NULL,
   `PC_Condition` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -53,7 +53,7 @@ CREATE TABLE `pc` (
 
 CREATE TABLE `pcbook` (
   `BookID` int(11) NOT NULL,
-  `PC_ID` int(11) NOT NULL,
+  `PC_ID` varchar(255) NOT NULL,
   `UserID` int(11) NOT NULL,
   `BookedDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -67,7 +67,7 @@ CREATE TABLE `pcbook` (
 CREATE TABLE `report` (
   `Report_ID` int(11) NOT NULL,
   `UserRole` varchar(255) NOT NULL,
-  `PC_ID` int(11) NOT NULL,
+  `PC_ID` varchar(255) NOT NULL,
   `ReportNote` varchar(255) NOT NULL,
   `ReportDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -80,7 +80,7 @@ CREATE TABLE `report` (
 
 CREATE TABLE `transactiondetail` (
   `TransactionID` int(11) NOT NULL,
-  `PC_ID` int(11) NOT NULL,
+  `PC_ID` varchar(255) NOT NULL,
   `CustomerName` varchar(255) NOT NULL,
   `BookTime` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -122,35 +122,36 @@ CREATE TABLE `user` (
 ALTER TABLE `job`
   ADD PRIMARY KEY (`Job_ID`),
   ADD KEY `UserID` (`UserID`),
-  ADD KEY `PC_ID` (`PC_ID`);
+  ADD KEY `job_ibfk_2` (`PC_ID`);
 
 --
 -- Indexes for table `pc`
 --
 ALTER TABLE `pc`
-  ADD PRIMARY KEY (`PC_ID`);
+  ADD PRIMARY KEY (`PC_ID`),
+  ADD UNIQUE KEY `PC_ID` (`PC_ID`);
 
 --
 -- Indexes for table `pcbook`
 --
 ALTER TABLE `pcbook`
   ADD PRIMARY KEY (`BookID`),
-  ADD KEY `PC_ID` (`PC_ID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `pcbook_ibfk_1` (`PC_ID`);
 
 --
 -- Indexes for table `report`
 --
 ALTER TABLE `report`
   ADD PRIMARY KEY (`Report_ID`),
-  ADD KEY `PC_ID` (`PC_ID`);
+  ADD KEY `report_ibfk_1` (`PC_ID`);
 
 --
 -- Indexes for table `transactiondetail`
 --
 ALTER TABLE `transactiondetail`
-  ADD KEY `PC_ID` (`PC_ID`),
-  ADD KEY `TransactionID` (`TransactionID`);
+  ADD KEY `TransactionID` (`TransactionID`),
+  ADD KEY `transactiondetail_ibfk_1` (`PC_ID`);
 
 --
 -- Indexes for table `transactionheader`
@@ -176,12 +177,6 @@ ALTER TABLE `job`
   MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `pc`
---
-ALTER TABLE `pc`
-  MODIFY `PC_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `pcbook`
 --
 ALTER TABLE `pcbook`
@@ -203,7 +198,7 @@ ALTER TABLE `transactionheader`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
