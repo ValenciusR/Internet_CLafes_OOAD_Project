@@ -38,7 +38,7 @@ public class JobManagemenPage {
 		public Button button_addJob, button_deletePc, button_updateJob;
 		MenuBar menuBar;
 		Menu menu;
-		public MenuItem pcItem, jobItem, staffItem;
+		public MenuItem pcItem, jobItem, staffItem, reportItem, historyItem;
 		public Alert addAlert, idExistAlert;
 	}
 	
@@ -54,8 +54,10 @@ public class JobManagemenPage {
 		jobManagementVar.pcItem = new MenuItem("PC Management"); 
 		jobManagementVar.jobItem = new MenuItem("Job Management"); 
 		jobManagementVar.staffItem = new MenuItem("Staff Management"); 
+		jobManagementVar.reportItem = new MenuItem("View All Report"); 
+		jobManagementVar.historyItem = new MenuItem("View All Transaction History"); 
 		
-		jobManagementVar.menu.getItems().addAll(jobManagementVar.pcItem, jobManagementVar.jobItem,jobManagementVar.staffItem  );
+		jobManagementVar.menu.getItems().addAll(jobManagementVar.pcItem, jobManagementVar.jobItem,jobManagementVar.staffItem, jobManagementVar.reportItem,jobManagementVar.historyItem  );
 		
 		jobManagementVar.menuBar = new MenuBar();
 		

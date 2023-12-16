@@ -35,7 +35,7 @@ public class PCManagementPage {
 		public Button button_addPC, button_deletePc, button_updatePc;
 		MenuBar menuBar;
 		Menu menu;
-		public MenuItem pcItem, jobItem,staffItem;
+		public MenuItem pcItem, jobItem,staffItem,reportItem, historyItem;
 		public Alert addAlert, idExistAlert;
 	}
 	
@@ -63,8 +63,10 @@ public class PCManagementPage {
 		pcManagementVar.pcItem = new MenuItem("PC Management"); 
 		pcManagementVar.jobItem = new MenuItem("Job Management"); 
 		pcManagementVar.staffItem = new MenuItem("Staff Management"); 
+		pcManagementVar.reportItem = new MenuItem("View All Report"); 
+		pcManagementVar.historyItem = new MenuItem("View All Transaction History"); 
 		
-		pcManagementVar.menu.getItems().addAll(pcManagementVar.pcItem, pcManagementVar.jobItem,pcManagementVar.staffItem);
+		pcManagementVar.menu.getItems().addAll(pcManagementVar.pcItem, pcManagementVar.jobItem,pcManagementVar.staffItem,pcManagementVar.reportItem, pcManagementVar.historyItem);
 		
 		pcManagementVar.menuBar = new MenuBar();
 		

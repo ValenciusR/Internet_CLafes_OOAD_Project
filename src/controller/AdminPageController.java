@@ -7,6 +7,10 @@ import view.PCManagementPage;
 import view.PCManagementPage.PCManagementVar;
 import view.StaffManagementPage;
 import view.StaffManagementPage.StaffManagementVar;
+import view.ViewReportPage;
+import view.ViewReportPage.ViewReportVar;
+import view.ViewTransactionHistoryPage;
+import view.ViewTransactionHistoryPage.ViewTransactionHistoryVar;
 
 public class AdminPageController {
 
@@ -19,6 +23,12 @@ public class AdminPageController {
 		});
 		pcManagementVar.staffItem.setOnAction(e->{
 			Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
+		});
+		pcManagementVar.reportItem.setOnAction(e->{
+			Main.changeScene(new ViewReportPage().initializeViewReportPage());
+		});
+		pcManagementVar.historyItem.setOnAction(e->{
+			Main.changeScene(new ViewTransactionHistoryPage().initializeViewTransactionHistoryPage());
 		});
 	}
 	
@@ -34,6 +44,12 @@ public class AdminPageController {
 		jobManagemenVar.staffItem.setOnAction(e->{
 			Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
 		});
+		jobManagemenVar.reportItem.setOnAction(e->{
+			Main.changeScene(new ViewReportPage().initializeViewReportPage());
+		});
+		jobManagemenVar.historyItem.setOnAction(e->{
+			Main.changeScene(new ViewTransactionHistoryPage().initializeViewTransactionHistoryPage());
+		});
 	}
 	
 	public void changeStaffManagementPage(StaffManagementVar staffManagementVar) {
@@ -45,6 +61,48 @@ public class AdminPageController {
 		});
 		staffManagementVar.staffItem.setOnAction(e->{
 			Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
+		});
+		staffManagementVar.reportItem.setOnAction(e->{
+			Main.changeScene(new ViewReportPage().initializeViewReportPage());
+		});
+		staffManagementVar.historyItem.setOnAction(e->{
+			Main.changeScene(new ViewTransactionHistoryPage().initializeViewTransactionHistoryPage());
+		});
+	}
+	
+	public void changeViewReportPage(ViewReportVar viewReportVar) {
+		viewReportVar.pcItem.setOnAction(e->{
+			Main.changeScene(new PCManagementPage().initializePCManagementPage());
+		});
+		viewReportVar.jobItem.setOnAction(e->{
+			Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
+		});
+		viewReportVar.staffItem.setOnAction(e->{
+			Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
+		});
+		viewReportVar.reportItem.setOnAction(e->{
+			Main.changeScene(new ViewReportPage().initializeViewReportPage());
+		});
+		viewReportVar.historyItem.setOnAction(e->{
+			Main.changeScene(new ViewTransactionHistoryPage().initializeViewTransactionHistoryPage());
+		});
+	}
+	
+	public void changeViewTransactionHistoryPage(ViewTransactionHistoryVar viewTransactionHistoryVar) {
+		viewTransactionHistoryVar.pcItem.setOnAction(e->{
+			Main.changeScene(new PCManagementPage().initializePCManagementPage());
+		});
+		viewTransactionHistoryVar.jobItem.setOnAction(e->{
+			Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
+		});
+		viewTransactionHistoryVar.staffItem.setOnAction(e->{
+			Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
+		});
+		viewTransactionHistoryVar.reportItem.setOnAction(e->{
+			Main.changeScene(new ViewReportPage().initializeViewReportPage());
+		});
+		viewTransactionHistoryVar.historyItem.setOnAction(e->{
+			Main.changeScene(new ViewTransactionHistoryPage().initializeViewTransactionHistoryPage());
 		});
 	}
 }

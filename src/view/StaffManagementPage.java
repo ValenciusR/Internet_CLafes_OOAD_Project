@@ -35,7 +35,7 @@ public class StaffManagementPage {
 		public Button button_updateRole;
 		MenuBar menuBar;
 		Menu menu;
-		public MenuItem pcItem, jobItem, staffItem;
+		public MenuItem pcItem, jobItem, staffItem, reportItem, historyItem ;
 		public Alert addAlert, idExistAlert;
 	}
 	
@@ -51,8 +51,10 @@ public class StaffManagementPage {
 		staffManagementVar.pcItem = new MenuItem("PC Management"); 
 		staffManagementVar.jobItem = new MenuItem("Job Management"); 
 		staffManagementVar.staffItem = new MenuItem("Staff Management");
+		staffManagementVar.reportItem = new MenuItem("View All Report");
+		staffManagementVar.historyItem = new MenuItem("View All Transaction History");
 		
-		staffManagementVar.menu.getItems().addAll(staffManagementVar.pcItem, staffManagementVar.jobItem,staffManagementVar.staffItem);
+		staffManagementVar.menu.getItems().addAll(staffManagementVar.pcItem, staffManagementVar.jobItem,staffManagementVar.staffItem, staffManagementVar.reportItem,staffManagementVar.historyItem);
 		
 		staffManagementVar.menuBar = new MenuBar();
 		
