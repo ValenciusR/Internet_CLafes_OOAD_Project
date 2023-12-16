@@ -1,95 +1,50 @@
 package controller;
 
 import main.Main;
-import view.AddJobPage;
-import view.AddJobPage.AddJobVar;
-import view.AddPCPage;
-import view.AddPCPage.AddPCVar;
-import view.AdminHomePage.AdminHomeVar;
-import view.DeletePCPage;
-import view.DeletePCPage.DeletePCVar;
-import view.UpdatePCPage;
-import view.UpdatePCPage.UpdatePCVar;
+import view.JobManagemenPage;
+import view.JobManagemenPage.JobManagementVar;
+import view.PCManagementPage;
+import view.PCManagementPage.PCManagementVar;
+import view.StaffManagementPage;
+import view.StaffManagementPage.StaffManagementVar;
 
 public class AdminPageController {
 
-	public void changeHomeMenuPage(AdminHomeVar adminHomeVar) {
-		adminHomeVar.menuItem1.setOnAction(e->{
-			Main.changeScene(new AddPCPage().initializeAddPCPage());
+	public void changePCManagementPage(PCManagementVar pcManagementVar) {
+		pcManagementVar.pcItem.setOnAction(e->{
+			Main.changeScene(new PCManagementPage().initializePCManagementPage());
 		});
-		adminHomeVar.menuItem2.setOnAction(e->{
-			Main.changeScene(new DeletePCPage().initializeDeletePCPage());
+		pcManagementVar.jobItem.setOnAction(e->{
+			Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
 		});
-		adminHomeVar.menuItem3.setOnAction(e->{
-			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
-		});
-		
-		adminHomeVar.staffItem1.setOnAction(e->{
-			Main.changeScene(new AddJobPage().initializeAddJobPage());
+		pcManagementVar.staffItem.setOnAction(e->{
+			Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
 		});
 	}
 	
-	public void changeAddPCMenuPage(AddPCVar addPCVar) {
-		addPCVar.menuItem1.setOnAction(e->{
-			Main.changeScene(new AddPCPage().initializeAddPCPage());
-		});
-		addPCVar.menuItem2.setOnAction(e->{
-			Main.changeScene(new DeletePCPage().initializeDeletePCPage());
-		});
-		addPCVar.menuItem3.setOnAction(e->{
-			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
-		});
-		
-		addPCVar.staffItem1.setOnAction(e->{
-			Main.changeScene(new AddJobPage().initializeAddJobPage());
-		});
-		
-	}
 	
-	public void changeDeletePCMenuPage(DeletePCVar deletePCVar) {
-		deletePCVar.menuItem1.setOnAction(e->{
-			Main.changeScene(new AddPCPage().initializeAddPCPage());
+	public void changeJobManagementPage(JobManagementVar jobManagemenVar) {
+		jobManagemenVar.pcItem.setOnAction(e->{
+			Main.changeScene(new PCManagementPage().initializePCManagementPage());
 		});
-		deletePCVar.menuItem2.setOnAction(e->{
-			Main.changeScene(new DeletePCPage().initializeDeletePCPage());
-		});
-		deletePCVar.menuItem3.setOnAction(e->{
-			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
+		jobManagemenVar.jobItem.setOnAction(e->{
+			Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
 		});
 		
-		deletePCVar.staffItem1.setOnAction(e->{
-			Main.changeScene(new AddJobPage().initializeAddJobPage());
+		jobManagemenVar.staffItem.setOnAction(e->{
+			Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
 		});
 	}
 	
-	public void changeUpdatePCMenuPage(UpdatePCVar updatePCVar) {
-		updatePCVar.menuItem1.setOnAction(e->{
-			Main.changeScene(new AddPCPage().initializeAddPCPage());
+	public void changeStaffManagementPage(StaffManagementVar staffManagementVar) {
+		staffManagementVar.pcItem.setOnAction(e->{
+			Main.changeScene(new PCManagementPage().initializePCManagementPage());
 		});
-		updatePCVar.menuItem2.setOnAction(e->{
-			Main.changeScene(new DeletePCPage().initializeDeletePCPage());
+		staffManagementVar.jobItem.setOnAction(e->{
+			Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
 		});
-		updatePCVar.menuItem3.setOnAction(e->{
-			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
+		staffManagementVar.staffItem.setOnAction(e->{
+			Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
 		});
-		updatePCVar.staffItem1.setOnAction(e->{
-			Main.changeScene(new AddJobPage().initializeAddJobPage());
-		});
-	}
-	
-	public void changeAddJobMenuPage(AddJobVar addJobVar) {
-		addJobVar.menuItem1.setOnAction(e->{
-			Main.changeScene(new AddPCPage().initializeAddPCPage());
-		});
-		addJobVar.menuItem2.setOnAction(e->{
-			Main.changeScene(new DeletePCPage().initializeDeletePCPage());
-		});
-		addJobVar.menuItem3.setOnAction(e->{
-			Main.changeScene(new UpdatePCPage().initializeUpdatePCPage());
-		});
-		addJobVar.staffItem1.setOnAction(e->{
-			Main.changeScene(new AddJobPage().initializeAddJobPage());
-		});
-		
 	}
 }

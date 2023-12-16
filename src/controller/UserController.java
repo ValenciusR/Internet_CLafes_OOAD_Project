@@ -1,8 +1,16 @@
 package controller;
 
 import database.UserModel;
+import javafx.scene.control.cell.PropertyValueFactory;
+import main.Main;
+import model.Pc;
 import model.User;
+import view.PCManagementPage;
+import view.JobManagemenPage.JobManagementVar;
+import view.PCManagementPage.PCManagementVar;
 import view.RegisterPage.RegisterVar;
+import view.StaffManagementPage;
+import view.StaffManagementPage.StaffManagementVar;
 
 public class UserController {
 	UserModel userModel = new UserModel();
@@ -23,4 +31,39 @@ public class UserController {
 			}
 		});
 	}
+	
+	public void handling_showUser(JobManagementVar jobManagementVar) {
+		for(User user : new UserModel().getUser()) {
+			if(user.getUserRole().equals("Technician")) {
+				jobManagementVar.addJobUserID.getItems().add(Integer.toString(user.getUserID()));
+			}
+		}
+	}
+	
+	public void handling_showStaff(StaffManagementVar staffManagementVar) {
+		for(User user : new UserModel().getUser()) {
+			if(!user.getUserRole().equals("Customer")) {
+				staffManagementVar.table.getItems().add(user);
+			}
+		}
+		staffManagementVar.user_idCol.setCellValueFactory(new PropertyValueFactory<User, Integer>("UserID"));
+		staffManagementVar.user_nameCol.setCellValueFactory(new PropertyValueFactory<User, String>("UserName"));
+		staffManagementVar.user_ageCol.setCellValueFactory(new PropertyValueFactory<User, Integer>("UserAge"));
+		staffManagementVar.user_roleCol.setCellValueFactory(new PropertyValueFactory<User, String>("UserRole"));
+	}
+	
+	public void handling_updateUser(StaffManagementVar staffManagementVar) {
+		staffManagementVar.button_updateRole.setOnAction(e->{
+			Integer user_id = Integer.parseInt(staffManagementVar.updateUserID_tf.getText());
+			String userRole = staffManagementVar.updateUserRole.getValue();
+			
+			if(user_id <= 0) {
+//				pcManagementVar.addAlert.showAndWait();
+			} else {
+				userModel.updateUserRole(user_id, userRole);
+				Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());
+			}
+		});
+	}
+	
 }

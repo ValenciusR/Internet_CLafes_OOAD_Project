@@ -29,6 +29,25 @@ public class JobModel {
 		}
 	}
 	
+	public void updateJob(String jobstatus, Integer jobId) {
+		Connect con = Connect.getInstance();
+		
+		String query = "UPDATE job SET JobStatus=? WHERE Job_ID = ?";
+		
+		PreparedStatement ps = con.prepareStatment(query);
+		
+		
+		try {
+			ps.setString(1, jobstatus);
+			ps.setInt(2, jobId);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Vector<Job> getJob() {
 		Connect con = Connect.getInstance();
 		

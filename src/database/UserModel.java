@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Pc;
 import model.User;
 
 public class UserModel {
@@ -24,6 +23,25 @@ public class UserModel {
 			ps.setInt(4, user.getUserAge());
 			ps.setString(5, user.getUserRole());
 			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateUserRole(Integer userId, String role) {
+		Connect con = Connect.getInstance();
+		
+		String query = "UPDATE user SET UserRole=? WHERE UserID = ?";
+		
+		PreparedStatement ps = con.prepareStatment(query);
+		
+		
+		try {
+			ps.setString(1, role);
+			ps.setInt(2, userId);
+
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

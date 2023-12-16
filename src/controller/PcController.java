@@ -2,72 +2,83 @@ package controller;
 
 
 import database.PcModel;
+import javafx.scene.control.cell.PropertyValueFactory;
+import main.Main;
 import model.Pc;
-import view.AddPCPage.AddPCVar;
-import view.DeletePCPage.DeletePCVar;
-import view.UpdatePCPage.UpdatePCVar;
+import view.JobManagemenPage.JobManagementVar;
+import view.PCManagementPage;
+import view.PCManagementPage.PCManagementVar;
 
 
 public class PcController {
 	PcModel pcModel = new PcModel();
 	
-	public void handling_addPc(AddPCVar addPCVar) {
-		addPCVar.button_addPc.setOnAction(e->{
-			String pc_id = addPCVar.pc_id.getText();
-			String pc_condition = addPCVar.pc_Condition.getValue();
+	public void handling_showPctoTable(PCManagementVar pcManagementVar) {
+		for (Pc pc : new PcModel().getPC()) {
+			pcManagementVar.table.getItems().add(pc);
+		}
+		
+		pcManagementVar.pc_idCol.setCellValueFactory(new PropertyValueFactory<Pc, String>("PC_ID"));
+		pcManagementVar.pc_conditionCol.setCellValueFactory(new PropertyValueFactory<Pc, String>("PC_Condition"));
+	}
+	
+	public void handling_addPc(PCManagementVar pcManagementVar) {
+		pcManagementVar.button_addPC.setOnAction(e->{
+			String pc_id = pcManagementVar.addPCID_tf.getText();
 			
 			if(pc_id.length() <= 0) {
-				addPCVar.fillalert.showAndWait();
+				pcManagementVar.addAlert.showAndWait();
 			} else {
 				for(Pc pc : new PcModel().getPC()) {
 					if(pc.getPC_ID().equals(pc_id)) {
-						addPCVar.idalert.showAndWait();
+						pcManagementVar.idExistAlert.showAndWait();
 						return;
 					}
 				}
-				
-				pcModel.addPC(new Pc(pc_id, pc_condition));
-				
+				pcModel.addPC(new Pc(pc_id, "Usable"));
+				Main.changeScene(new PCManagementPage().initializePCManagementPage());
 			}
 		});
 	}
 	
-	public void handling_showPc(DeletePCVar deletePCVar) {
+	public void handling_showPc(PCManagementVar PCManagementVar) {
 		for(Pc pc : new PcModel().getPC()) {
-			deletePCVar.pc_id.getItems().add(pc.getPC_ID());
+			PCManagementVar.updatePC_ID.getItems().add(pc.getPC_ID());
+			PCManagementVar.deleteID.getItems().add(pc.getPC_ID());
 		}
 	}
 	
-	public void handling_showPc(UpdatePCVar updatePCVar) {
+	public void handling_showPc(JobManagementVar jobManagementVar) {
 		for(Pc pc : new PcModel().getPC()) {
-			updatePCVar.old_pc_id.getItems().add(pc.getPC_ID());
+			if(pc.getPC_Condition().equals("Broken")) {
+				jobManagementVar.addJobPCID.getItems().add(pc.getPC_ID());
+			}
 		}
 	}
 	
-	public void handling_deletePc(DeletePCVar deletePCVar) {
-		deletePCVar.button_deletePc.setOnAction(e->{
-			String pc_id = deletePCVar.pc_id.getValue();
+	public void handling_deletePc(PCManagementVar PCManagementVar) {
+		PCManagementVar.button_deletePc.setOnAction(e->{
+			String pc_id = PCManagementVar.deleteID.getValue();
 			
 			if(pc_id.length() <= 0) {
-				deletePCVar.alert.showAndWait();
+				PCManagementVar.addAlert.showAndWait();
 			} else {
 				pcModel.deletePC(pc_id);
-				
+				Main.changeScene(new PCManagementPage().initializePCManagementPage());
 			}
 		});
 	}
 	
-	public void handling_updatePc(UpdatePCVar updatePCVar) {
-		updatePCVar.button_updatePc.setOnAction(e->{
-			String oldpc_id = updatePCVar.old_pc_id.getValue();
-			String pc_id = updatePCVar.pc_id.getText();
-			String pc_condition = updatePCVar.pc_Condition.getValue();
+	public void handling_updatePc(PCManagementVar pcManagementVar) {
+		pcManagementVar.button_updatePc.setOnAction(e->{
+			String pc_id = pcManagementVar.updatePC_ID.getValue();
+			String pc_condition = pcManagementVar.updatepc_Condition.getValue();
 			
 			if(pc_id.length() <= 0) {
-				updatePCVar.alert.showAndWait();
+				pcManagementVar.addAlert.showAndWait();
 			} else {
-				pcModel.updatePC(new Pc(pc_id, pc_condition), oldpc_id);
-				
+				pcModel.updatePC(new Pc(pc_id, pc_condition));
+				Main.changeScene(new PCManagementPage().initializePCManagementPage());
 			}
 		});
 	}

@@ -1,54 +1,53 @@
 package controller;
 
 import database.JobModel;
-import database.PcModel;
-import database.UserModel;
+import javafx.scene.control.cell.PropertyValueFactory;
+import main.Main;
 import model.Job;
-import model.Pc;
-import model.User;
-import view.AddJobPage.AddJobVar;
+import view.JobManagemenPage;
+import view.JobManagemenPage.JobManagementVar;
 
 public class JobController {
 	JobModel jobModel = new JobModel();
 	
-	public void handling_addJob(AddJobVar addJobVar) {
-		addJobVar.button_addJob.setOnAction(e->{
+	public void handling_addJob(JobManagementVar jobManagementVar) {
+		jobManagementVar.button_addJob.setOnAction(e->{
 			int id = 0;
-			String pc_id = addJobVar.pc_id.getValue();
-			int userId = addJobVar.user_id.getValue();
-			System.out.println(userId);
-			String jobstatus = addJobVar.jobstatus.getValue();
+			String pc_id = jobManagementVar.addJobPCID.getValue();
+			int userId = Integer.parseInt(jobManagementVar.addJobUserID.getValue());
 			
 			if(pc_id.length() <= 0 || userId <= 0 ) {
-				addJobVar.alert.showAndWait();
 			} else {
-				for(User user : new UserModel().getUser()) {
-					if(user.getUserID() == userId) {
-						if(user.getUserRole().equals("Technician")) {
-							jobModel.addJob(new Job(id,userId, pc_id, jobstatus));
-							return;
-						}
-						addJobVar.alertTech.showAndWait();
-						return;
-					}
-				}
-				addJobVar.alertTech.showAndWait();
+				jobModel.addJob(new Job(id,userId, pc_id, "Uncomplete"));
+				Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
 			}
 		});
 	}
 	
-	public void handling_showPC(AddJobVar addJobVar) {
-		for(Pc pc : new PcModel().getPC()) {
-			addJobVar.pc_id.getItems().add(pc.getPC_ID());
-		}
+	public void handling_UpdateJob(JobManagementVar jobManagementVar) {
+		jobManagementVar.button_updateJob.setOnAction(e->{
+			int jobId = Integer.parseInt(jobManagementVar.updateJob_ID.getValue());
+			String jobstatus = jobManagementVar.updateJob_Status.getValue();
+			
+			if(jobstatus.length() <= 0 || jobId <= 0 ) {
+			} else {
+				jobModel.updateJob(jobstatus, jobId);
+				Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
+			}
+		});
 	}
 	
-	public void handling_showUser(AddJobVar addJobVar) {
-		for(User user : new UserModel().getUser()) {
-			if(user.getUserRole().equals("Technician")) {
-				addJobVar.user_id.getItems().add(user.getUserID());
-			}
+	public void handling_showJob(JobManagementVar jobManagementVar) {
+		for (Job job : new JobModel().getJob()) {
+			jobManagementVar.table.getItems().add(job);
+			jobManagementVar.updateJob_ID.getItems().add(Integer.toString(job.getJobID()));
 		}
+		
+		jobManagementVar.job_idCol.setCellValueFactory(new PropertyValueFactory<Job, Integer>("JobID"));
+		jobManagementVar.user_idCol.setCellValueFactory(new PropertyValueFactory<Job, Integer>("UserID"));
+		jobManagementVar.pc_idCol.setCellValueFactory(new PropertyValueFactory<Job, String>("PC_ID"));
+		jobManagementVar.job_statusCol.setCellValueFactory(new PropertyValueFactory<Job, String>("JobStatus"));
 	}
+	
 	
 }
