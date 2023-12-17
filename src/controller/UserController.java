@@ -31,7 +31,7 @@ public class UserController {
 	
 	public void handling_showUser(JobManagementVar jobManagementVar) {
 		for(User user : new UserModel().getUser()) {
-			if(user.getUserRole().equals("Technician")) {
+			if(user.getUserRole().equals("Computer Technician")) {
 				jobManagementVar.addJobUserID.getItems().add(Integer.toString(user.getUserID()));
 			}
 		}
@@ -51,11 +51,16 @@ public class UserController {
 	
 	public void handling_updateUser(StaffManagementVar staffManagementVar) {
 		staffManagementVar.button_updateRole.setOnAction(e->{
-			Integer user_id = Integer.parseInt(staffManagementVar.updateUserID_tf.getText());
+			Integer user_id;
 			String userRole = staffManagementVar.updateUserRole.getValue();
 			
+			if(staffManagementVar.updateUserID_tf.getLength() <= 0) {
+				user_id = -1;
+			}else {
+				user_id = Integer.parseInt(staffManagementVar.updateUserID_tf.getText());
+			}
 			if(user_id <= 0) {
-//				pcManagementVar.addAlert.showAndWait();
+				staffManagementVar.addAlert.showAndWait();
 			} else {
 				userModel.updateUserRole(user_id, userRole);
 				Main.changeScene(new StaffManagementPage().initializeStaffManagementPage());

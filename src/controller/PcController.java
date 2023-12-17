@@ -1,10 +1,14 @@
 package controller;
 
 
+import java.sql.Date;
+
+import database.PcBookModel;
 import database.PcModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.Main;
 import model.Pc;
+import model.PcBook;
 import view.JobManagemenPage.JobManagementVar;
 import view.PCManagementPage;
 import view.PCManagementPage.PCManagementVar;
@@ -59,10 +63,17 @@ public class PcController {
 	public void handling_deletePc(PCManagementVar PCManagementVar) {
 		PCManagementVar.button_deletePc.setOnAction(e->{
 			String pc_id = PCManagementVar.deleteID.getValue();
+			long time = System.currentTimeMillis();
+			Date nowDate = new java.sql.Date(time);
 			
-			if(pc_id.length() <= 0) {
-				PCManagementVar.addAlert.showAndWait();
+			if(pc_id == null) {
+				PCManagementVar.deleteIDAlert.showAndWait();
 			} else {
+				for(PcBook pcbook : new PcBookModel().getPcBook()) {
+					if(pc_id.equals(pcbook.getPC_ID()) && pcbook.getBookedDate().after(nowDate)) {
+						PCManagementVar.deleteDateAlert.showAndWait();
+					}
+				}
 				pcModel.deletePC(pc_id);
 				Main.changeScene(new PCManagementPage().initializePCManagementPage());
 			}
@@ -74,8 +85,8 @@ public class PcController {
 			String pc_id = pcManagementVar.updatePC_ID.getValue();
 			String pc_condition = pcManagementVar.updatepc_Condition.getValue();
 			
-			if(pc_id.length() <= 0) {
-				pcManagementVar.addAlert.showAndWait();
+			if(pc_id == null) {
+				pcManagementVar.updateIDAlert.showAndWait();
 			} else {
 				pcModel.updatePC(new Pc(pc_id, pc_condition));
 				Main.changeScene(new PCManagementPage().initializePCManagementPage());

@@ -13,10 +13,12 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.User;
+import view.JobManagemenPage.JobManagementVar;
 
 public class StaffManagementPage {
 	public class StaffManagementVar{
@@ -37,6 +39,12 @@ public class StaffManagementPage {
 		Menu menu;
 		public MenuItem pcItem, jobItem, staffItem, reportItem, historyItem ;
 		public Alert addAlert, idExistAlert;
+	}
+	
+	private void initializeaddAlert(StaffManagementVar staffManagementVar) {
+		staffManagementVar.addAlert = new Alert(AlertType.ERROR);
+		staffManagementVar.addAlert.setTitle("Change Role Error");
+		staffManagementVar.addAlert.setContentText("User ID must be filled to Change Role!");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -105,6 +113,7 @@ public class StaffManagementPage {
 		// TODO Auto-generated method stub
 		StaffManagementVar staffManagementVar = new StaffManagementVar();
 		initialize(staffManagementVar);
+		initializeaddAlert(staffManagementVar);
 		handle(staffManagementVar);
 		
 		return staffManagementVar.scene;

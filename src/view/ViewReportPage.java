@@ -46,7 +46,7 @@ public class ViewReportPage {
 		viewReportVar.pcItem = new MenuItem("PC Management"); 
 		viewReportVar.jobItem = new MenuItem("Job Management"); 
 		viewReportVar.staffItem = new MenuItem("Staff Management"); 
-		viewReportVar.reportItem = new MenuItem("Staff Management"); 
+		viewReportVar.reportItem = new MenuItem("View All Report"); 
 		viewReportVar.historyItem = new MenuItem("View All Transaction History"); 
 		
 		viewReportVar.menu.getItems().addAll(viewReportVar.pcItem, viewReportVar.jobItem,viewReportVar.staffItem  , viewReportVar.reportItem, viewReportVar.historyItem);

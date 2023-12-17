@@ -2,14 +2,10 @@ package controller;
 
 import java.sql.Date;
 
-import database.PcModel;
 import database.TransactionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
-import main.Main;
-import model.Pc;
 import model.TransactionDetail;
 import model.TransactionHeader;
-import view.PCManagementPage;
 import view.ViewTransactionHistoryPage.ViewTransactionHistoryVar;
 
 public class TransactionController {
