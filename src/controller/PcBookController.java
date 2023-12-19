@@ -1,35 +1,31 @@
 package controller;
 
+
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.time.LocalDate;
-import database.PCBookModel;
+import database.PcBookModel;
 import database.PcModel;
 import database.TransactionModel;
 import database.UserModel;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.PCBook;
 import model.Pc;
-import model.TransactionHeader;
-import model.User;
-import view.LoginPage.LoginVar;
+import model.PcBook;
 import view.OperatorPage.OperatorVar;
-import view.PCManagementPage.PCManagementVar;
 
 public class PcBookController {
-	PCBookModel pcbM = new PCBookModel();
+	PcBookModel pcbM = new PcBookModel();
 	TransactionModel tm = new TransactionModel();
 	UserModel um = new UserModel();
 	TransactionController tc = new TransactionController();
 
 	public void handling_showBookedPC(OperatorVar ov) {
-		for (PCBook pc : new PCBookModel().getBookedPC()) {
+		for (PcBook pc : new PcBookModel().getBookedPC()) {
 			ov.table.getItems().add(pc);
 		}
-		ov.book_idCol.setCellValueFactory(new PropertyValueFactory<PCBook, Integer>("BookID"));
-		ov.pc_idCol.setCellValueFactory(new PropertyValueFactory<PCBook, String>("PC_ID"));
-		ov.user_idCol.setCellValueFactory(new PropertyValueFactory<PCBook, Integer>("UserID"));
-		ov.date_Col.setCellValueFactory(new PropertyValueFactory<PCBook, Date>("BookedDate"));
+		ov.book_idCol.setCellValueFactory(new PropertyValueFactory<PcBook, Integer>("BookID"));
+		ov.pc_idCol.setCellValueFactory(new PropertyValueFactory<PcBook, String>("PC_ID"));
+		ov.user_idCol.setCellValueFactory(new PropertyValueFactory<PcBook, Integer>("UserID"));
+		ov.date_Col.setCellValueFactory(new PropertyValueFactory<PcBook, Date>("BookedDate"));
 	}
 
 	public void handling_cancelBook(OperatorVar ov) { 
@@ -48,7 +44,7 @@ public class PcBookController {
 	}
 
 	public void handling_showassignUser(OperatorVar ov) {
-		for (PCBook pb : new PCBookModel().getBookedPC()) {
+		for (PcBook pb : new PcBookModel().getBookedPC()) {
 			for(Pc pc : new PcModel().getPC()) {
 				ov.pcBook_cb.getItems().add(pc.getPC_ID());
 			}
@@ -64,9 +60,9 @@ public class PcBookController {
 			long now = System.currentTimeMillis();
 			Date today = new Date(now);
 			
-			for(PCBook pb : new PCBookModel().getBookedPC()) {
+			for(PcBook pb : new PcBookModel().getBookedPC()) {
 				if(!pb.getPC_ID().equals(pc_id) && pb.getUserID() != userID) {
-					pcbM.book(new PCBook(id, pc_id, userID, today));
+					pcbM.book(new PcBook(id, pc_id, userID, today));
 				}else if(pb.getPC_ID().equals(pc_id)) {
 					ov.alertBookedPC.showAndWait();
 				}

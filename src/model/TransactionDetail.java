@@ -47,4 +47,5 @@ public class TransactionDetail {
 	public void setBookTime(Date bookTime) {
 		BookTime = bookTime;
 	}
+
 }

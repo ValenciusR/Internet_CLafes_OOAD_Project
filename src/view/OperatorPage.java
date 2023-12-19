@@ -24,7 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Job;
-import model.PCBook;
+import model.PcBook;
 import view.LoginPage.LoginVar;
 
 public class OperatorPage {
@@ -35,11 +35,11 @@ public class OperatorPage {
 		GridPane gp;
 		VBox vb1, vb2;
 
-		public TableView<PCBook> table;
-		public TableColumn<PCBook, Integer> book_idCol;
-		public TableColumn<PCBook, String> pc_idCol;
-		public TableColumn<PCBook, Integer> user_idCol;
-		public TableColumn<PCBook, Date> date_Col;
+		public TableView<PcBook> table;
+		public TableColumn<PcBook, Integer> book_idCol;
+		public TableColumn<PcBook, String> pc_idCol;
+		public TableColumn<PcBook, Integer> user_idCol;
+		public TableColumn<PcBook, Date> date_Col;
 		public DatePicker dp, dp2;
 		public Label cancel_lbl, finish_lbl, assign_lbl, userIdtobeAssigned_lbl;
 		
@@ -91,11 +91,11 @@ public class OperatorPage {
 		ov.menuBar.getMenus().addAll(ov.menu, ov.refresh);
 		
 		
-		ov.table = new TableView<PCBook>();
-		ov.book_idCol = new TableColumn<PCBook, Integer>("Book ID");
-		ov.pc_idCol = new TableColumn<PCBook, String>("PC ID");
-		ov.user_idCol = new TableColumn<PCBook, Integer>("User ID");
-		ov.date_Col = new TableColumn<PCBook, Date>("Booked Date");
+		ov.table = new TableView<PcBook>();
+		ov.book_idCol = new TableColumn<PcBook, Integer>("Book ID");
+		ov.pc_idCol = new TableColumn<PcBook, String>("PC ID");
+		ov.user_idCol = new TableColumn<PcBook, Integer>("User ID");
+		ov.date_Col = new TableColumn<PcBook, Date>("Booked Date");
 		
 		ov.table.getColumns().addAll(ov.book_idCol, ov.pc_idCol, 
 				ov.user_idCol, ov.date_Col);

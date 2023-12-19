@@ -5,7 +5,7 @@ public class Job {
 	private int UserID;
 	private String PC_ID;
 	private String JobStatus;
-
+	
 	public Job(int jobID, int userID, String pC_ID, String jobStatus) {
 		super();
 		JobID = jobID;
@@ -46,4 +46,6 @@ public class Job {
 		JobStatus = jobStatus;
 	}
 
+
 }
+

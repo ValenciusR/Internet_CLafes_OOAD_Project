@@ -1,17 +1,27 @@
 package controller;
 
 
+import java.sql.Date;
+
+import database.PcBookModel;
 import database.PcModel;
+
 import database.UserModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.Main;
 import model.Pc;
-import model.User;
 import view.JobManagementPage.JobManagementVar;
-import view.OperatorPage.OperatorVar;
+import view.LoginPage.LoginVar;
 import view.PCManagementPage;
 import view.PCManagementPage.PCManagementVar;
 import view.TechnicianPage.TechnicianVar;
+import main.Main;
+import model.Pc;
+import model.PcBook;
+import view.JobManagementPage.JobManagementVar;
+import view.PCManagementPage;
+import view.PCManagementPage.PCManagementVar;
+
 
 
 public class PcController {
@@ -26,7 +36,7 @@ public class PcController {
 		pcManagementVar.pc_conditionCol.setCellValueFactory(new PropertyValueFactory<Pc, String>("PC_Condition"));
 	}
 	
-	public void handling_addPc(PCManagementVar pcManagementVar) {
+	public void handling_addPc(PCManagementVar pcManagementVar, LoginVar lv) {
 		pcManagementVar.button_addPC.setOnAction(e->{
 			String pc_id = pcManagementVar.addPCID_tf.getText();
 			
@@ -40,7 +50,7 @@ public class PcController {
 					}
 				}
 				pcModel.addPC(new Pc(pc_id, "Usable"));
-				Main.changeScene(new PCManagementPage().initializePCManagementPage());
+				Main.changeScene(new PCManagementPage().initializePCManagementPage(lv));
 			}
 		});
 	}
@@ -61,28 +71,37 @@ public class PcController {
 	}
 	
 	
-	public void handling_deletePc(PCManagementVar PCManagementVar) {
+	public void handling_deletePc(PCManagementVar PCManagementVar, LoginVar lv) {
 		PCManagementVar.button_deletePc.setOnAction(e->{
 			String pc_id = PCManagementVar.deleteID.getValue();
-			if(pc_id.length() <= 0) {
-				PCManagementVar.addAlert.showAndWait();
+			long time = System.currentTimeMillis();
+			Date nowDate = new java.sql.Date(time);
+			
+			if(pc_id == null) {
+				PCManagementVar.deleteIDAlert.showAndWait();
+
 			} else {
+				for(PcBook pcbook : new PcBookModel().getPcBook()) {
+					if(pc_id.equals(pcbook.getPC_ID()) && pcbook.getBookedDate().after(nowDate)) {
+						PCManagementVar.deleteDateAlert.showAndWait();
+					}
+				}
 				pcModel.deletePC(pc_id);
-				Main.changeScene(new PCManagementPage().initializePCManagementPage());
+				Main.changeScene(new PCManagementPage().initializePCManagementPage(lv));
 			}
 		});
 	}
 	
-	public void handling_updatePc(PCManagementVar pcManagementVar) {
+	public void handling_updatePc(PCManagementVar pcManagementVar, LoginVar lv) {
 		pcManagementVar.button_updatePc.setOnAction(e->{
 			String pc_id = pcManagementVar.updatePC_ID.getValue();
 			String pc_condition = pcManagementVar.updatepc_Condition.getValue();
 			
-			if(pc_id.length() <= 0) {
-				pcManagementVar.addAlert.showAndWait();
+			if(pc_id == null) {
+				pcManagementVar.updateIDAlert.showAndWait();
 			} else {
 				pcModel.updatePC(new Pc(pc_id, pc_condition));
-				Main.changeScene(new PCManagementPage().initializePCManagementPage());
+				Main.changeScene(new PCManagementPage().initializePCManagementPage(lv));
 			}
 		});
 	}

@@ -20,9 +20,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Job;
+import view.LoginPage.LoginVar;
 
 
-public class JobManagemenPage {
+public class JobManagementPage {
 	public class JobManagementVar{
 		Scene scene;
 		BorderPane bp;
@@ -118,11 +119,11 @@ public class JobManagemenPage {
 		jobManagementVar.scene = new Scene(jobManagementVar.bp, 600, 600);
 	}
 	
-	private void handle(JobManagementVar jobManagementVar) {
+	private void handle(JobManagementVar jobManagementVar, LoginVar lv) {
 		JobController jobController = new JobController();
-		jobController.handling_addJob(jobManagementVar);
+		jobController.handling_addJob(jobManagementVar, lv);
 		jobController.handling_showJob(jobManagementVar);
-		jobController.handling_UpdateJob(jobManagementVar);
+		jobController.handling_UpdateJob(jobManagementVar, lv);
 		
 		UserController userController = new UserController();
 		userController.handling_showUser(jobManagementVar);
@@ -132,10 +133,10 @@ public class JobManagemenPage {
 
 		
 		AdminPageController adminPageController = new AdminPageController();
-		adminPageController.changeJobManagementPage(jobManagementVar);
+		adminPageController.changeJobManagementPage(jobManagementVar, lv);
 	}
 	
-	public Scene initializeJobManagementPage(){
+	public Scene initializeJobManagementPage(LoginVar lv){
 		// TODO Auto-generated method stub
 		JobManagementVar jobManagementVar = new JobManagementVar();
 		initialize(jobManagementVar);
@@ -143,7 +144,7 @@ public class JobManagemenPage {
 		initializedoingJobAlert(jobManagementVar);
 		initializeupdateAlert(jobManagementVar);
 
-		handle(jobManagementVar);
+		handle(jobManagementVar, lv);
 		
 		return jobManagementVar.scene;
 	}

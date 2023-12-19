@@ -6,20 +6,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Job;
-import model.PCBook;
+import model.PcBook;
 
-public class PCBookModel {
-	public Vector<PCBook> getBookedPC() {
+public class PcBookModel {
+	public Vector<PcBook> getPcBook() {
+		Connect con = Connect.getInstance();
+		
+		String query = "SELECT * FROM pcbook";
+		ResultSet rs = con.selectData(query);
+		Vector<PcBook> vectPcBook = new Vector<>();
+		
+		try {
+			while(rs.next()) {
+				vectPcBook.add(new PcBook(rs.getInt("BookID"),
+									  rs.getString("PC_ID"),
+									  rs.getInt("UserID"),
+									  rs.getDate("BookedDate")));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return vectPcBook;
+	}
+	
+	public Vector<PcBook> getBookedPC() {
 		Connect con = Connect.getInstance();
 
 		String query = "SELECT * FROM pcbook";
 		ResultSet rs = con.selectData(query);
-		Vector<PCBook> pb = new Vector<>();
+		Vector<PcBook> pb = new Vector<>();
 
 		try {
 			while (rs.next()) {
-				pb.add(new PCBook(rs.getInt("BookID"), 
+				pb.add(new PcBook(rs.getInt("BookID"), 
 						rs.getString("PC_ID"),
 						rs.getInt("UserID"), 
 						rs.getDate("BookedDate")));
@@ -31,7 +51,7 @@ public class PCBookModel {
 		return pb;
 	}
 	
-	public void book(PCBook book) {
+	public void book(PcBook book) {
         Connect con = Connect.getInstance();
 
         String query = "INSERT INTO pcbook VALUES(?,?,?,?)";
@@ -114,4 +134,6 @@ public class PCBookModel {
 		
 		return rs;
 	}
+	
+	
 }

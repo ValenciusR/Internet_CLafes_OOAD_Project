@@ -2,14 +2,13 @@ package model;
 
 import java.sql.Date;
 
-public class PCBook {
+public class PcBook {
 	private int BookID;
 	private String PC_ID;
 	private int UserID;
 	private Date BookedDate;
-	
 
-	public PCBook(int bookID, String pC_ID, int userID, Date bookedDate) {
+	public PcBook(int bookID, String pC_ID, int userID, Date bookedDate) {
 		super();
 		BookID = bookID;
 		PC_ID = pC_ID;

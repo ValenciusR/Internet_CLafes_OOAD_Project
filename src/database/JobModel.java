@@ -104,7 +104,7 @@ public class JobModel {
 		
 		return vectJob;
 	}
-	
+
 //	public Vector<Job> getJobTech() {
 //		Connect con = Connect.getInstance();
 //		
@@ -126,3 +126,6 @@ public class JobModel {
 //		return vectJob;
 //	}
 }
+
+
+

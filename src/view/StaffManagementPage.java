@@ -13,10 +13,17 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
+import javafx.scene.control.Alert.AlertType;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.User;
+
+import view.JobManagementPage.JobManagementVar;
+import view.LoginPage.LoginVar;
+
 
 public class StaffManagementPage {
 	public class StaffManagementVar{
@@ -35,8 +42,16 @@ public class StaffManagementPage {
 		public Button button_updateRole;
 		MenuBar menuBar;
 		Menu menu;
-		public MenuItem pcItem, jobItem, staffItem;
+
+
+		public MenuItem pcItem, jobItem, staffItem, reportItem, historyItem ;
 		public Alert addAlert, idExistAlert;
+	}
+	
+	private void initializeaddAlert(StaffManagementVar staffManagementVar) {
+		staffManagementVar.addAlert = new Alert(AlertType.ERROR);
+		staffManagementVar.addAlert.setTitle("Change Role Error");
+		staffManagementVar.addAlert.setContentText("User ID must be filled to Change Role!");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -51,8 +66,11 @@ public class StaffManagementPage {
 		staffManagementVar.pcItem = new MenuItem("PC Management"); 
 		staffManagementVar.jobItem = new MenuItem("Job Management"); 
 		staffManagementVar.staffItem = new MenuItem("Staff Management");
+		staffManagementVar.reportItem = new MenuItem("View All Report");
+		staffManagementVar.historyItem = new MenuItem("View All Transaction History");
 		
-		staffManagementVar.menu.getItems().addAll(staffManagementVar.pcItem, staffManagementVar.jobItem,staffManagementVar.staffItem);
+		staffManagementVar.menu.getItems().addAll(staffManagementVar.pcItem, staffManagementVar.jobItem,staffManagementVar.staffItem, staffManagementVar.reportItem,staffManagementVar.historyItem);
+
 		
 		staffManagementVar.menuBar = new MenuBar();
 		
@@ -80,7 +98,9 @@ public class StaffManagementPage {
 		staffManagementVar.button_updateRole = new Button("Change Role");
 		
 		staffManagementVar.vb1.getChildren().add(staffManagementVar.menuBar);
-		staffManagementVar.vb2.getChildren().addAll(staffManagementVar.table, staffManagementVar.updateUser_lbl, staffManagementVar.updateUserId_lbl, staffManagementVar.updateUserID_tf , staffManagementVar.updateUserRole_lbl, staffManagementVar.updateUserRole, staffManagementVar.button_updateRole);
+		staffManagementVar.vb2.getChildren().addAll(staffManagementVar.table, staffManagementVar.updateUser_lbl, 
+				staffManagementVar.updateUserId_lbl, staffManagementVar.updateUserID_tf , staffManagementVar.updateUserRole_lbl, 
+				staffManagementVar.updateUserRole, staffManagementVar.button_updateRole);
 
 		staffManagementVar.gp.add(staffManagementVar.vb1, 0, 0);
 		staffManagementVar.gp.add(staffManagementVar.vb2, 0, 1);
@@ -90,20 +110,22 @@ public class StaffManagementPage {
 		staffManagementVar.scene = new Scene(staffManagementVar.bp, 600, 600);
 	}
 	
-	private void handle(StaffManagementVar staffManagementVar) {
+	private void handle(StaffManagementVar staffManagementVar, LoginVar lv) {
 		UserController userController = new UserController();
 		userController.handling_showStaff(staffManagementVar);
-		userController.handling_updateUser(staffManagementVar);
+		userController.handling_updateUser(staffManagementVar, lv);
 		
 		AdminPageController adminPageController = new AdminPageController();
-		adminPageController.changeStaffManagementPage(staffManagementVar);
+		adminPageController.changeStaffManagementPage(staffManagementVar, lv);
 	}
 	
-	public Scene initializeStaffManagementPage(){
+	public Scene initializeStaffManagementPage(LoginVar lv){
 		// TODO Auto-generated method stub
 		StaffManagementVar staffManagementVar = new StaffManagementVar();
 		initialize(staffManagementVar);
-		handle(staffManagementVar);
+		initializeaddAlert(staffManagementVar);
+
+		handle(staffManagementVar, lv);
 		
 		return staffManagementVar.scene;
 	}

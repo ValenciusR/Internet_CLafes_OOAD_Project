@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.Date;
 import java.sql.ResultSet;
-import java.util.Vector;
 
 import database.PcModel;
 import database.ReportModel;
@@ -12,6 +11,8 @@ import model.Report;
 import model.User;
 import view.LoginPage.LoginVar;
 import view.ReportFormPage.ReportForm;
+import javafx.scene.control.cell.PropertyValueFactory;
+import view.ViewReportPage.ViewReportVar;
 
 public class ReportController {
 	
@@ -53,7 +54,16 @@ public class ReportController {
 		});
 	}
 	
-	
-	
-	
+	public void handling_showReport(ViewReportVar viweReportVar) {
+		for (Report report : new ReportModel().getReport()) {
+			viweReportVar.table.getItems().add(report);
+		}
+		
+		viweReportVar.report_idCol.setCellValueFactory(new PropertyValueFactory<Report, Integer>("Report_ID"));
+		viweReportVar.user_roleCol.setCellValueFactory(new PropertyValueFactory<Report, String>("UserRole"));
+		viweReportVar.pc_idCol.setCellValueFactory(new PropertyValueFactory<Report, String>("PC_ID"));
+		viweReportVar.report_noteCol.setCellValueFactory(new PropertyValueFactory<Report, String>("ReportNote"));
+		viweReportVar.report_dateCol.setCellValueFactory(new PropertyValueFactory<Report, Date>("ReportDate"));
+	}
+
 }

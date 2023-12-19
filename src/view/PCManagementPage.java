@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Pc;
+import view.LoginPage.LoginVar;
 
 
 public class PCManagementPage {
@@ -35,20 +36,43 @@ public class PCManagementPage {
 		public Button button_addPC, button_deletePc, button_updatePc;
 		MenuBar menuBar;
 		Menu menu;
-		public MenuItem pcItem, jobItem,staffItem;
-		public Alert addAlert, idExistAlert;
+
+		public MenuItem pcItem, jobItem,staffItem,reportItem, historyItem;
+		public Alert addAlert, idExistAlert, updateIDAlert, deleteIDAlert, deleteDateAlert;
+
 	}
 	
 	private void initializeaddAlert(PCManagementVar pcManagementVar) {
 		pcManagementVar.addAlert = new Alert(AlertType.ERROR);
 		pcManagementVar.addAlert.setTitle("Add PC Error");
 		pcManagementVar.addAlert.setContentText("All fields must be filled!");
+
+
 	}
 	
 	private void initializeidExistAlert(PCManagementVar pcManagementVar) {
 		pcManagementVar.idExistAlert = new Alert(AlertType.ERROR);
 		pcManagementVar.idExistAlert.setTitle("Add PC Error");
-		pcManagementVar.idExistAlert.setContentText("ID allready Exist");
+		pcManagementVar.idExistAlert.setContentText("ID already Exist");
+		
+	}
+	
+	private void initializeupdateIDAlert(PCManagementVar pcManagementVar) {
+		pcManagementVar.updateIDAlert = new Alert(AlertType.ERROR);
+		pcManagementVar.updateIDAlert.setTitle("Update PC Error");
+		pcManagementVar.updateIDAlert.setContentText("ID Must be Selected!");
+	}
+	
+	private void initializedeleteIDAlert(PCManagementVar pcManagementVar) {
+		pcManagementVar.deleteIDAlert = new Alert(AlertType.ERROR);
+		pcManagementVar.deleteIDAlert.setTitle("Delete PC Error");
+		pcManagementVar.deleteIDAlert.setContentText("ID Must be Selected!");
+	}
+	
+	private void initializedeleteDateAlert(PCManagementVar pcManagementVar) {
+		pcManagementVar.deleteDateAlert = new Alert(AlertType.ERROR);
+		pcManagementVar.deleteDateAlert.setTitle("Delete PC Error");
+		pcManagementVar.deleteDateAlert.setContentText("This PC have been Booked!");
 	}
 	
 	@SuppressWarnings({ "unchecked", "unused" })
@@ -63,8 +87,10 @@ public class PCManagementPage {
 		pcManagementVar.pcItem = new MenuItem("PC Management"); 
 		pcManagementVar.jobItem = new MenuItem("Job Management"); 
 		pcManagementVar.staffItem = new MenuItem("Staff Management"); 
+		pcManagementVar.reportItem = new MenuItem("View All Report"); 
+		pcManagementVar.historyItem = new MenuItem("View All Transaction History"); 
 		
-		pcManagementVar.menu.getItems().addAll(pcManagementVar.pcItem, pcManagementVar.jobItem,pcManagementVar.staffItem);
+		pcManagementVar.menu.getItems().addAll(pcManagementVar.pcItem, pcManagementVar.jobItem,pcManagementVar.staffItem,pcManagementVar.reportItem, pcManagementVar.historyItem);
 		
 		pcManagementVar.menuBar = new MenuBar();
 		
@@ -108,25 +134,30 @@ public class PCManagementPage {
 		pcManagementVar.scene = new Scene(pcManagementVar.bp, 600, 600);
 	}
 	
-	private void handle(PCManagementVar pcManagementVar) {
+	private void handle(PCManagementVar pcManagementVar, LoginVar lv) {
 		PcController pcController = new PcController();
 		pcController.handling_showPctoTable(pcManagementVar);
-		pcController.handling_addPc(pcManagementVar);
+		pcController.handling_addPc(pcManagementVar, lv);
 		pcController.handling_showPc(pcManagementVar);
-		pcController.handling_updatePc(pcManagementVar);
-		pcController.handling_deletePc(pcManagementVar);
+		pcController.handling_updatePc(pcManagementVar, lv);
+		pcController.handling_deletePc(pcManagementVar, lv);
 		
 		AdminPageController adminPageController = new AdminPageController();
-		adminPageController.changePCManagementPage(pcManagementVar);
+		adminPageController.changePCManagementPage(pcManagementVar, lv);
 	}
 	
-	public Scene initializePCManagementPage(){
+	public Scene initializePCManagementPage(LoginVar lv){
 		// TODO Auto-generated method stub
 		PCManagementVar pcManagementVar = new PCManagementVar();
+		
 		initialize(pcManagementVar);
 		initializeaddAlert(pcManagementVar);
 		initializeidExistAlert(pcManagementVar);
-		handle(pcManagementVar);
+
+		initializeupdateIDAlert(pcManagementVar);
+		initializedeleteIDAlert(pcManagementVar);
+		initializedeleteDateAlert(pcManagementVar); 
+		handle(pcManagementVar, lv);
 		
 		return pcManagementVar.scene;
 	}

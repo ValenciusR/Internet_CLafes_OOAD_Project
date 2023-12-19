@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Report {
 	
-	private int ReportID;
+	private int Report_ID;
 //	private User user;
 //	private Pc pc;
 	private String UserRole;
@@ -12,27 +12,26 @@ public class Report {
 	private String ReportNote;
 	private Date ReportDate;
 	
-	public Report(int reportID, String userRole, String pcID, String reportNote, Date reportDate) {
+	public Report(int report_ID, String userRole, String pC_ID, String reportNote, Date reportDate) {
 		super();
-		ReportID = reportID;
+		Report_ID = report_ID;
 		UserRole = userRole;
-		PC_ID = pcID;
-//		UserRole = user.getUserRole();
-//		pcID = pc.getPC_ID();
+		PC_ID = pC_ID;
 		ReportNote = reportNote;
 		ReportDate = reportDate;
 	}
 
-	public int getReportID() {
-		return ReportID;
-	}
-	
-	public void setReportID(int reportID) {
-		ReportID = reportID;
-	}
 	
 	// COBA DICEK (gaada arrow bawah jir)
-	
+
+	public int getReport_ID() {
+		return Report_ID;
+	}
+
+	public void setReport_ID(int report_ID) {
+		Report_ID = report_ID;
+	}
+
 	public String getUserRole() {
 		return UserRole;
 	}
@@ -52,7 +51,15 @@ public class Report {
 //		pc.setPC_ID(pcID);
 	}
 	
-	// COBA DICEK ^
+
+
+//	public String getPC_ID() {
+//		return PC_ID;
+//	}
+//
+//	public void setPC_ID(String pC_ID) {
+//		PC_ID = pC_ID;
+//	}
 
 	public String getReportNote() {
 		return ReportNote;
