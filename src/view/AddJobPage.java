@@ -111,7 +111,7 @@ public class AddJobPage {
 	
 	private void handle(AddJobVar addJobVar) {
 		JobController jobController = new JobController();
-		jobController.handling_showPC(addJobVar);
+		//jobController.handling_showPC(addJobVar);
 		jobController.handling_addJob(addJobVar);
 		jobController.handling_showUser(addJobVar);
 		

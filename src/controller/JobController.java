@@ -1,10 +1,10 @@
 package controller;
 
 import database.JobModel;
-import database.PcModel;
+//import database.PcModel;
 import database.UserModel;
 import model.Job;
-import model.Pc;
+//import model.Pc;
 import model.User;
 import view.AddJobPage.AddJobVar;
 
@@ -37,11 +37,11 @@ public class JobController {
 		});
 	}
 	
-	public void handling_showPC(AddJobVar addJobVar) {
-		for(Pc pc : new PcModel().getPC()) {
-			addJobVar.pc_id.getItems().add(pc.getPC_ID());
-		}
-	}
+//	public void handling_showPC(AddJobVar addJobVar) {
+//		for(Pc pc : new PcModel().getPC()) {
+//			addJobVar.pc_id.getItems().add(pc.getPC_ID());
+//		}
+//	}
 	
 	public void handling_showUser(AddJobVar addJobVar) {
 		for(User user : new UserModel().getUser()) {

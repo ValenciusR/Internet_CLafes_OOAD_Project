@@ -1,7 +1,7 @@
 package view;
 
 import controller.AdminPageController;
-import controller.PcController;
+//import controller.PcController;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -80,22 +80,22 @@ public class DeletePCPage {
 		deletePCVar.scene = new Scene(deletePCVar.bp, 600, 600);
 	}
 	
-	private void handle(DeletePCVar deletePCVar) {
-		PcController pcController = new PcController();
-		pcController.handling_showPc(deletePCVar);
-		pcController.handling_deletePc(deletePCVar);
-		
-		
-		AdminPageController adminPageController = new AdminPageController();
-		adminPageController.changeDeletePCMenuPage(deletePCVar);
-	}
+//	private void handle(DeletePCVar deletePCVar) {
+//		PcController pcController = new PcController();
+//		pcController.handling_showPc(deletePCVar);
+//		pcController.handling_deletePc(deletePCVar);
+//		
+//		
+//		AdminPageController adminPageController = new AdminPageController();
+//		adminPageController.changeDeletePCMenuPage(deletePCVar);
+//	}
 	
 	public Scene initializeDeletePCPage(){
 		// TODO Auto-generated method stub
 		DeletePCVar deletePCVar = new DeletePCVar();
 		initialize(deletePCVar);
 		initializeAlert(deletePCVar);
-		handle(deletePCVar);
+		//handle(deletePCVar);
 		
 		return deletePCVar.scene;
 	}

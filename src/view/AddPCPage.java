@@ -1,7 +1,7 @@
 package view;
 
 import controller.AdminPageController;
-import controller.PcController;
+//import controller.PcController;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -94,8 +94,8 @@ public class AddPCPage {
 	}
 	
 	private void handle(AddPCVar addPCVar) {
-		PcController pcController = new PcController();
-		pcController.handling_addPc(addPCVar);
+		//PcController pcController = new PcController();
+		//pcController.handling_addPc(addPCVar);
 		
 		AdminPageController adminPageController = new AdminPageController();
 		adminPageController.changeAddPCMenuPage(addPCVar);

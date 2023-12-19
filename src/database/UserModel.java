@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import model.Pc;
+//import model.Pc;
 import model.User;
 
 public class UserModel {
@@ -53,5 +53,45 @@ public class UserModel {
 		}
 		
 		return vectUser;
+	}
+	
+	public ResultSet getUserByUsername(String username) {
+		Connect con = Connect.getInstance();
+		
+		String query = "SELECT * FROM user where UserName = ?";
+		PreparedStatement ps = con.prepareStatment(query);
+		ResultSet rs = null;
+		
+		
+		try {
+			ps.setString(1, username);
+			
+			
+			rs = ps.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rs;
+	}
+	
+	public ResultSet getUserById(int id) {
+		Connect con = Connect.getInstance();
+		
+		String query = "SELECT * FROM user where UserID = ?";
+		PreparedStatement ps = con.prepareStatment(query);
+		ResultSet rs = null;
+		
+		
+		try {
+			ps.setInt(1, id);
+			
+			
+			rs = ps.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rs;
 	}
 }

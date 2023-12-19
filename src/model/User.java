@@ -6,7 +6,8 @@ public class User {
 	private String UserPassword;
 	private int UserAge;
 	private String UserRole;
-
+//	private String currentUser;
+	
 	public User(int userID, String userName, String userPassword, int userAge, String userRole) {
 		super();
 		UserID = userID;
@@ -55,5 +56,13 @@ public class User {
 	public void setUserRole(String userRole) {
 		UserRole = userRole;
 	}
+
+//	public String getCurrentUser() {
+//		return currentUser;
+//	}
+//
+//	public void setCurrentUser(String userName) {
+//		currentUser = userName;
+//	}
 
 }

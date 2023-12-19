@@ -1,7 +1,7 @@
 package view;
 
 import controller.AdminPageController;
-import controller.PcController;
+//import controller.PcController;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -91,21 +91,21 @@ public class UpdatePCPage {
 		updatePCVar.scene = new Scene(updatePCVar.bp, 600, 600);
 	}
 	
-	private void handle(UpdatePCVar updatePCVar) {
-		PcController pcController = new PcController();
-		pcController.handling_showPc(updatePCVar);
-		pcController.handling_updatePc(updatePCVar);
-		
-		AdminPageController adminPageController = new AdminPageController();
-		adminPageController.changeUpdatePCMenuPage(updatePCVar);
-	}
-	
+//	private void handle(UpdatePCVar updatePCVar) {
+//		PcController pcController = new PcController();
+//		pcController.handling_showPc(updatePCVar);
+//		pcController.handling_updatePc(updatePCVar);
+//		
+//		AdminPageController adminPageController = new AdminPageController();
+//		adminPageController.changeUpdatePCMenuPage(updatePCVar);
+//	}
+//	
 	public Scene initializeUpdatePCPage(){
 		// TODO Auto-generated method stub
 		UpdatePCVar updatePCVar = new UpdatePCVar();
 		initialize(updatePCVar);
 		initializeAlert(updatePCVar);
-		handle(updatePCVar);
+		//handle(updatePCVar);
 		
 		return updatePCVar.scene;
 	}
