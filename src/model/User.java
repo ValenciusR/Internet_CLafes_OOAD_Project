@@ -5,7 +5,7 @@ public class User {
 	private String UserName;
 	private String UserPassword;
 	private int UserAge;
-	private String UserRole;
+	private String UserRole = "Technician";
 
 	public User(int userID, String userName, String userPassword, int userAge, String userRole) {
 		super();

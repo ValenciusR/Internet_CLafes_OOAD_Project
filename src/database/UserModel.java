@@ -30,6 +30,25 @@ public class UserModel {
 		}
 	}
 	
+	public void updateUserRole(Integer userId, String role) {
+		Connect con = Connect.getInstance();
+
+		String query = "UPDATE user SET UserRole=? WHERE UserID = ?";
+
+		PreparedStatement ps = con.prepareStatment(query);
+
+
+		try {
+			ps.setString(1, role);
+			ps.setInt(2, userId);
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Vector<User> getUser() {
 		Connect con = Connect.getInstance();
 		
@@ -50,6 +69,40 @@ public class UserModel {
 		}
 		
 		return vectUser;
+	}
+	
+	public ResultSet getUserByUsername(String username) {
+		Connect con = Connect.getInstance();
+		
+		String query = "SELECT * FROM user where UserName = ?";
+		PreparedStatement ps = con.prepareStatment(query);
+		ResultSet rs = null;
+		
+		try {
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rs;
+	}
+	
+	public ResultSet getUserbyUserID(Integer userID) {
+		Connect con = Connect.getInstance();
+		
+		String query = "SELECT * FROM user where UserID = ?";
+		PreparedStatement ps = con.prepareStatment(query);
+		ResultSet rs = null;
+		
+		try {
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rs;
 	}
 	
 }

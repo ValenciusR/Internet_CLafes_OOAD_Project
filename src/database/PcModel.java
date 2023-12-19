@@ -15,11 +15,9 @@ public class PcModel {
 		
 		PreparedStatement ps = con.prepareStatment(query);
 		
-		
 		try {
 			ps.setString(1, pc.getPC_ID());
 			ps.setString(2, pc.getPC_Condition());
-			
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -34,7 +32,6 @@ public class PcModel {
 		
 		PreparedStatement ps = con.prepareStatment(query);
 		
-		
 		try {
 			ps.setString(1, pc_id);
 			ps.executeUpdate();
@@ -45,18 +42,17 @@ public class PcModel {
 		}
 	}
 	
-	public void updatePC(Pc pc, String pcid) {
+	public void updatePC(Pc pc) {
 		Connect con = Connect.getInstance();
 		
-		String query = "UPDATE pc SET PC_ID =?, PC_CONDITION=? WHERE PC_ID = ?";
+		String query = "UPDATE pc SET PC_CONDITION=? WHERE PC_ID = ?";
 		
 		PreparedStatement ps = con.prepareStatment(query);
 		
 		
 		try {
-			ps.setString(1, pc.getPC_ID());
-			ps.setString(2, pc.getPC_Condition());
-			ps.setString(3, pcid);
+			ps.setString(1, pc.getPC_Condition());
+			ps.setString(2, pc.getPC_ID());
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {

@@ -18,6 +18,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import view.LoginPage.LoginVar;
 import view.RegisterPage.RegisterVar;
 
 public class ReportFormPage {
@@ -48,8 +49,8 @@ public class ReportFormPage {
 	
 	private void initializeAlertSameID(ReportForm rf) {
 		rf.alertSameID = new Alert(AlertType.ERROR);
-		rf.alertSameID.setTitle("PC ID Error");
-		rf.alertSameID.setContentText("PC with the same ID already exists in report database.");
+		rf.alertSameID.setTitle("Invalid PC ID");
+		rf.alertSameID.setContentText("This PC doesn't exist.");
 	}
 	
 	private void initialize(ReportForm rf) {
@@ -82,22 +83,23 @@ public class ReportFormPage {
 		rf.scene = new Scene(rf.bp, 600, 600);
 	}
 	
-	private void handle(ReportForm rf) {
+	private void handle(ReportForm rf, LoginVar lv) {
 		// TODO Auto-generated method stub
 		ReportController rc = new ReportController();
-		rc.handling_addReport(rf);
+		rc.handling_addReport(rf, lv);
 		
 		PageController pc = new PageController();
 		pc.changePageToRegister(rf);
 		
 	}
 	
-	public Scene initializeReportFormPage() {
+	public Scene initializeReportFormPage(LoginVar lv) {
 		ReportForm rf = new ReportForm();
+		
 		initialize(rf);
 		initializeAlertEmpty(rf);
 		initializeAlertSameID(rf);
-		handle(rf);
+		handle(rf, lv);
 		
 		return rf.scene;
 	}
