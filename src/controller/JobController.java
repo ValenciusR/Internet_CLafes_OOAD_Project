@@ -28,17 +28,19 @@ public class JobController {
 				jobManagementVar.addAlert.showAndWait();
 			} else {
 				if(jobModel.getJob().size() == 0) {
-					jobModel.addJob(new Job(id,userId, pc_id, "Uncomplete"));
+					jobModel.addJob(new Job(id,userId, pc_id, "UnComplete"));
 					Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
 					
 				}else {
 					for (Job job : new JobModel().getJob()) {
 						if(job.getPC_ID().equals(pc_id) && job.getJobStatus().equals("UnComplete")) {
 							jobManagementVar.doingJobAlert.showAndWait();
+							return;
 						}else {
-							jobModel.addJob(new Job(id,userId, pc_id, "Uncomplete"));
+							jobModel.addJob(new Job(id,userId, pc_id, "UnComplete"));
 							Main.changeScene(new JobManagemenPage().initializeJobManagementPage());
 							System.out.println("yy");
+							return;
 						}
 					}	
 				}
