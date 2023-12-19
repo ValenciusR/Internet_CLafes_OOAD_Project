@@ -15,13 +15,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Job;
 
 
-public class JobManagementPage {
+public class JobManagemenPage {
 	public class JobManagementVar{
 		Scene scene;
 		BorderPane bp;
@@ -40,7 +41,24 @@ public class JobManagementPage {
 		Menu menu;
 		public MenuItem pcItem, jobItem, staffItem, reportItem, historyItem;
 		public Alert addAlert, doingJobAlert, updateAlert;
-		
+	}
+	
+	private void initializeaddAlert(JobManagementVar jobManagementVar) {
+		jobManagementVar.addAlert = new Alert(AlertType.ERROR);
+		jobManagementVar.addAlert.setTitle("Add Job Error");
+		jobManagementVar.addAlert.setContentText("User ID and PC ID field must be filled to add Job!");
+	}
+	
+	private void initializedoingJobAlert(JobManagementVar jobManagementVar) {
+		jobManagementVar.doingJobAlert = new Alert(AlertType.ERROR);
+		jobManagementVar.doingJobAlert.setTitle("Add Job Error");
+		jobManagementVar.doingJobAlert.setContentText("A Technician already doing the Job!");
+	}
+	
+	private void initializeupdateAlert(JobManagementVar jobManagementVar) {
+		jobManagementVar.updateAlert = new Alert(AlertType.ERROR);
+		jobManagementVar.updateAlert.setTitle("Update Job Error");
+		jobManagementVar.updateAlert.setContentText("Job ID and Job Status must be Filled");
 	}
 	
 	@SuppressWarnings({ "unchecked", "unused" })
@@ -121,6 +139,10 @@ public class JobManagementPage {
 		// TODO Auto-generated method stub
 		JobManagementVar jobManagementVar = new JobManagementVar();
 		initialize(jobManagementVar);
+		initializeaddAlert(jobManagementVar);
+		initializedoingJobAlert(jobManagementVar);
+		initializeupdateAlert(jobManagementVar);
+
 		handle(jobManagementVar);
 		
 		return jobManagementVar.scene;

@@ -13,6 +13,7 @@ import view.TechnicianPage.TechnicianVar;
 
 public class JobController {
 	JobModel jobModel = new JobModel();
+	PcModel pcModel = new PcModel();
 
 	public void handling_addJob(JobManagementVar jobManagementVar) {
 		  jobManagementVar.button_addJob.setOnAction(e->{
@@ -43,23 +44,63 @@ public class JobController {
 		       return;
 		      }
 		     } 
-		    };};});}
+		    }
+
+		   }
+		});
+	}
 
 		   
 
 	public void handling_UpdateJob(JobManagementVar jobManagementVar) {
-		jobManagementVar.button_updateJob.setOnAction(e -> {
-			int jobId = Integer.parseInt(jobManagementVar.updateJob_ID.getValue());
+		jobManagementVar.button_updateJob.setOnAction(e->{
+			int jobId ;
 			String jobstatus = jobManagementVar.updateJob_Status.getValue();
-
-			if (jobstatus.length() <= 0 || jobId <= 0) {
+			
+			if(jobManagementVar.updateJob_ID.getValue() == null) {
+				jobId = -1;
+			}else {
+				jobId = Integer.parseInt(jobManagementVar.updateJob_ID.getValue());
+			}
+			
+			if(jobstatus == null || jobId <= 0 ) {
+				jobManagementVar.updateAlert.showAndWait();
+				
 			} else {
-				jobModel.updateJob(jobstatus, jobId);
+				if(jobstatus.equals("Complete")) {
+					for (Job job : new JobModel().getJob()) {
+						if(job.getJobID() == jobId) {
+							jobModel.updateJob(jobstatus, jobId);
+							pcModel.updatePC(new Pc(job.getPC_ID(), "Usable"));
+						}
+					}
+				}else {
+					for (Job job : new JobModel().getJob()) {
+						if(job.getJobID() == jobId) {
+							jobModel.updateJob(jobstatus, jobId);
+							pcModel.updatePC(new Pc(job.getPC_ID(), "Maintenance"));
+						}
+					}
+				}
 				Main.changeScene(new JobManagementPage().initializeJobManagementPage());
 			}
 		});
 	}
-
+	
+	public void handling_showJob(JobManagementVar jobManagementVar) {
+		for (Job job : new JobModel().getJob()) {
+			jobManagementVar.table.getItems().add(job);
+			jobManagementVar.updateJob_ID.getItems().add(Integer.toString(job.getJobID()));
+		}
+		
+		jobManagementVar.job_idCol.setCellValueFactory(new PropertyValueFactory<Job, Integer>("JobID"));
+		jobManagementVar.user_idCol.setCellValueFactory(new PropertyValueFactory<Job, Integer>("UserID"));
+		jobManagementVar.pc_idCol.setCellValueFactory(new PropertyValueFactory<Job, String>("PC_ID"));
+		jobManagementVar.job_statusCol.setCellValueFactory(new PropertyValueFactory<Job, String>("JobStatus"));
+	}
+	
+	// TechnicianVar
+	
 	// complete button
 	public void handling_completeJob(TechnicianVar techVar) {
 		techVar.button_completeJob.setOnAction(e -> {
@@ -87,16 +128,6 @@ public class JobController {
 		techVar.job_statusCol.setCellValueFactory(new PropertyValueFactory<Job, String>("JobStatus"));
 	}
 
-	public void handling_showJob(JobManagementVar jobManagementVar) {
-		for (Job job : new JobModel().getJob()) {
-			jobManagementVar.table.getItems().add(job);
-			jobManagementVar.updateJob_ID.getItems().add(Integer.toString(job.getJobID()));
-		}
 
-		jobManagementVar.job_idCol.setCellValueFactory(new PropertyValueFactory<Job, Integer>("JobID"));
-		jobManagementVar.user_idCol.setCellValueFactory(new PropertyValueFactory<Job, Integer>("UserID"));
-		jobManagementVar.pc_idCol.setCellValueFactory(new PropertyValueFactory<Job, String>("PC_ID"));
-		jobManagementVar.job_statusCol.setCellValueFactory(new PropertyValueFactory<Job, String>("JobStatus"));
-	}
 
 }
